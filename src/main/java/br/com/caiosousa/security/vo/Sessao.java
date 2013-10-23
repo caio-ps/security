@@ -1,10 +1,13 @@
 package br.com.caiosousa.security.vo;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import br.com.caiosousa.pessoa.enumeration.Grupo;
 
-public class Sessao {
+public class Sessao implements Serializable {
+
+	private static final long serialVersionUID = -8429320250864083850L;
 
 	private Long tenant;
 	private String email;

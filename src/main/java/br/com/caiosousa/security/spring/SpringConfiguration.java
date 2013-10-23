@@ -28,7 +28,9 @@ public class SpringConfiguration {
 	
 	@Bean
 	public JedisConnectionFactory jedisConnFactory() throws Exception {
-		return new JedisConnectionFactory();
+		final JedisConnectionFactory jedisConnectionFactory = new JedisConnectionFactory();
+		jedisConnectionFactory.setUsePool(Boolean.TRUE);
+		return jedisConnectionFactory;
 	}
 
 	@Bean
