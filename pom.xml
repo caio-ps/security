@@ -58,7 +58,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>rest</finalName>
+		<finalName>modulosecurity</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
