@@ -157,7 +157,7 @@ public class SegurancaServico {
 		final Tenant tenant = buscaTenant(pessoa.getTenant());
 		
 		final Sessao sessao = new Sessao(pessoa.getTenant(), tenant.getDescricao(), pessoa.getEmail(),
-				pessoa.getGrupos(), pendenteEscolhaTenant);
+				pessoa.getGrupos(), pendenteEscolhaTenant, token);
 
 		redis.opsForValue().set(token, sessao);
 		redis.expire(token, tempoExpiracao, unidadeTempoExpiracao);

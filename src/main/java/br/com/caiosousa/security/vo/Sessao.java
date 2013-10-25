@@ -12,18 +12,24 @@ public class Sessao implements Serializable {
 	public static final long TEMPO_EXPIRACAO_SESSAO = 30L;
 	public static final long TEMPO_EXPIRACAO_SESSAO_PENDENTE = 1L;
 
+	private String token;
 	private Long tenant;
 	private String descricaoTenant;
 	private String email;
 	private Set<Grupo> grupos;
 	private Boolean pendenteEscolhaTenant;
 
-	public Sessao(Long tenant, String descricaoTenant, String email, Set<Grupo> grupos, Boolean pendenteEscolhaTenant) {
+	public Sessao() {
+	}
+
+	public Sessao(Long tenant, String descricaoTenant, String email, Set<Grupo> grupos, Boolean pendenteEscolhaTenant,
+			String token) {
 		this.tenant = tenant;
 		this.descricaoTenant = descricaoTenant;
 		this.email = email;
 		this.grupos = grupos;
 		this.pendenteEscolhaTenant = pendenteEscolhaTenant;
+		this.token = token;
 	}
 
 	public Long getTenant() {
@@ -64,6 +70,14 @@ public class Sessao implements Serializable {
 
 	public void setDescricaoTenant(String descricaoTenant) {
 		this.descricaoTenant = descricaoTenant;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 }
