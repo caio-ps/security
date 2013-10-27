@@ -64,9 +64,7 @@ public class SegurancaServico {
 	}
 
 	public void destroiSessao(final String token) {
-
 		redis.delete(token);
-
 	}
 
 	private List<Sessao> criaSessoes(final String email, final String senha)

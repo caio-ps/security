@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import br.com.caiosousa.exception.AcessoNegadoExeption;
-import br.com.caiosousa.pessoa.model.Pessoa;
 import br.com.caiosousa.security.service.SegurancaServico;
+import br.com.caiosousa.security.vo.Login;
 import br.com.caiosousa.security.vo.LoginsDisponiveisJSON;
 import br.com.caiosousa.security.vo.Sessao;
 
@@ -30,10 +30,10 @@ public class SegurancaController {
 	@ResponseBody
     @RequestMapping(method = RequestMethod.POST, value="/login")
     @ResponseStatus(value = HttpStatus.CREATED)
-    public HttpEntity<LoginsDisponiveisJSON> login(@RequestBody Pessoa pessoa)
+    public HttpEntity<LoginsDisponiveisJSON> login(@RequestBody Login login)
     		throws AcessoNegadoExeption {
 
-    	final List<Sessao> sessoesCriadas = segurancaServico.login(pessoa.getEmail(), pessoa.getSenha());
+    	final List<Sessao> sessoesCriadas = segurancaServico.login(login.getEmail(), login.digestedSenha());
     	final LoginsDisponiveisJSON loginsDisponiveis = new LoginsDisponiveisJSON(sessoesCriadas);
     	
     	return new ResponseEntity<LoginsDisponiveisJSON>(loginsDisponiveis, HttpStatus.CREATED);
@@ -65,7 +65,14 @@ public class SegurancaController {
 	@ResponseBody
 	@ExceptionHandler(value = { AcessoNegadoExeption.class })
 	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
-	public String retornaRegistroNaoEncontrado(Exception ex) {
+	public String acessoNegadoPrevisto(Exception ex) {
+		return "ACESSO NEGADO";
+	}
+	
+	@ResponseBody
+	@ExceptionHandler(value = { Throwable.class })
+	@ResponseStatus(value = HttpStatus.UNAUTHORIZED)
+	public String acessoNegadoContingencia(Exception ex) {
 		return "ACESSO NEGADO";
 	}
 
